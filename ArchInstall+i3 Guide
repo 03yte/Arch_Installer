@@ -27,6 +27,7 @@ ________________________________________________________________________________
  
     # mkfs.ext4 /dev/root_partition
     # mkswap /dev/swap_partition
+    # mkfs.fat -F32 /dev/efi_partition
     
 4) Mounting the paritions: 
   # mount /dev/root_partition /mnt
@@ -34,7 +35,7 @@ ________________________________________________________________________________
   
 5) Install linux firmware and utlities:
  **Add more as needed
-  # pacstrap /mnt base linux linux-firmware vim sudo grub 
+  # pacstrap /mnt base linux linux-firmware vim sudo grub efibootmgr os-prober
 
 6) Generate fstab
   # genfstab -U /mnt >> /mnt/etc/fstab
@@ -75,8 +76,22 @@ ________________________________________________
 # mkinitcpio -P
 # passwd
 
-13) Configure grub:
+13) EFI Jargon
+#
+** Be sure to still be mounted in target install path
+**sda1 in this case is the efi partition
+#mkdir /boot/efi
+#mount /dev/sda1 /boot/efi
+
+
+14) Configure grub:
 #https://wiki.archlinux.org/title/GRUB
+
+# grub-install --target=x86_64-efi --bootloader-id=grub_uefi
+# grub-mkconfig -o /boot/grub/grub.cfg
+
+
+15) Enable services
  
   
   
