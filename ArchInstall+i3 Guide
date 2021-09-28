@@ -1,0 +1,83 @@
+#https://wiki.archlinux.org/title/installation_guide
+
+1) Verify internet connectivity:
+
+2) Set time clock:
+  # timedatectl set-ntp true
+  then check 
+  # timedatectl status
+  
+3) Partitioning the disk:
+  # fdisk
+  or 
+  # cfdisk --neat guicli tool  
+  
+Parition Schema:
+____________________________________________________________________________________________
+BIOS with MBR Mount point 	Partition 	Partition type 	Suggested size
+[SWAP] 	/dev/swap_partition 	Linux swap 	More than 512 MiB
+/mnt 	/dev/root_partition 	Linux 	Remainder of the device
+____________________________________________________________________________________________
+UEFI with GPT Mount point 	Partition 	Partition type 	Suggested size
+/mnt/boot or /mnt/efi1 	/dev/efi_system_partition 	EFI system partition 	At least 260 MiB
+[SWAP] 	/dev/swap_partition 	Linux swap 	More than 512 MiB
+/mnt 	/dev/root_partition 	Linux x86-64 root (/) 	Remainder of the device 
+____________________________________________________________________________________________
+  3a) Format partitions
+ 
+    # mkfs.ext4 /dev/root_partition
+    # mkswap /dev/swap_partition
+    
+4) Mounting the paritions: 
+  # mount /dev/root_partition /mnt
+  # swapon /dev/swap_partition
+  
+5) Install linux firmware and utlities:
+ **Add more as needed
+  # pacstrap /mnt base linux linux-firmware vim sudo grub 
+
+6) Generate fstab
+  # genfstab -U /mnt >> /mnt/etc/fstab
+
+7) Chroot into new FS:
+  # arch-chroot /mnt
+
+8) Set your time:
+  **List all timezones avaiable
+  $ timedatectl list-timezones
+
+  **Example
+  # timedatectl set-timezone US/Eastern
+  
+  Run hwclock(8) to generate /etc/adjtime: 
+  # hwclock --systohc
+  
+9) Locale locale locale:
+## locale is a set of environmental variables that defines the language, country, and character encoding settings (or any other special variant preferences) for your applications and shell session on a Linux system.##
+  9a)Edit /etc/locale.gen and uncomment en_US.UTF-8 UTF-8:
+    
+  9b) Create the file /etc/locale.conf and add the following:
+      LANG=en_US.UTF-8
+  9c) Run the command:
+    # locale-gen
+    
+ 10)Set hostname
+  create /etc/hostname file and enter hostname
+  
+ 11) Editing and fill the following file: /etc/hosts
+________________________________________________
+127.0.0.1	localhost
+::1		localhost
+127.0.1.1	myhostname.localdomain	myhostname
+________________________________________________
+
+12) Generate initframfs and set passwd
+# mkinitcpio -P
+# passwd
+
+13) Configure grub:
+#https://wiki.archlinux.org/title/GRUB
+ 
+  
+  
+
