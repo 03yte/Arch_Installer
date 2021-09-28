@@ -35,7 +35,7 @@ ________________________________________________________________________________
   
 5) Install linux firmware and utlities:
  **Add more as needed
-  # pacstrap /mnt base linux linux-firmware vim sudo grub efibootmgr os-prober
+  # pacstrap /mnt base linux linux-firmware vim sudo grub efibootmgr os-prober dhcpcd
 
 6) Generate fstab
   # genfstab -U /mnt >> /mnt/etc/fstab
