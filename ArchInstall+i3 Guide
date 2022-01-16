@@ -35,7 +35,7 @@ ________________________________________________________________________________
   
 5) Install linux firmware and utlities:
  **Add more as needed
-  # pacstrap /mnt base linux linux-firmware vim sudo grub efibootmgr os-prober dhcpcd rsync openssh 
+  # pacstrap /mnt base linux linux-firmware vim sudo grub efibootmgr os-prober dhcpcd rsync openssh dhcpcf
 
 6) Generate fstab
   # genfstab -U /mnt >> /mnt/etc/fstab
@@ -92,6 +92,17 @@ ________________________________________________
 
 
 15) Enable services
+systemctl enable dhcpcd
+
+16) Install i3
+sudo pacman -S i3 arandr
+
+17) Configure X:
+echo "exec /bin/i3" >> .xinitrc
+echo "startx" >> .bashrc
+
+
+
  
   
   
