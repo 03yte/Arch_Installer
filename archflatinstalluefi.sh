@@ -5,6 +5,8 @@ pacstrap="base linux linux-firmware vim openssh i3 xorg dmenu dhcpcd bash-comple
 tardisk="/dev/vda" #edit this to target disk
 hostname="thename"
 
+TEST 
+
 umount ${tardisk}1
 umount ${tardisk}3
 swapoff ${tardisk}2
