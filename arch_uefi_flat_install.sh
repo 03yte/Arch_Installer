@@ -1,11 +1,9 @@
 #!/bin/bash
-gptbootpartsize=512 
-swapsize=1024 
+gptbootpartsize=512 #512 MegaBytes
+swapsize=1024 # 1024
 pacstrap="base linux linux-firmware vim openssh i3 xorg dmenu dhcpcd bash-completion sudo grub --noconfirm" #Base packages for install
 tardisk="/dev/vda" #edit this to target disk
 hostname="thename"
-
-TEST1 
 
 umount ${tardisk}1
 umount ${tardisk}3
