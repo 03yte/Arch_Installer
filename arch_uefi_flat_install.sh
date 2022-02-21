@@ -43,9 +43,9 @@ hwclock --systohc
 echo "Configuring Hostname"
 echo $hostname > /etc/hostname
 echo "Configuring /etc/hosts"
-echo "127.0.0.1		localhost"
-echo "::1		localhost"
-echo "127.0.1.1		${hostname}.localdomain	${hostname}"
+echo "127.0.0.1		localhosti" >> /etc/hosts
+echo "::1		localhost" >> /etc/hosts
+echo "127.0.1.1		${hostname}.localdomain	${hostname}" >> /etc/hosts
 echo "Enabling Services"
 systemctl enable dhcpcd.service
 systemctl enable sshd.service
